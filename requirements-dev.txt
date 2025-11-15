@@ -1,0 +1,22 @@
+--upgrade pip setuptools wheel
+torch 
+torchvision 
+torchaudio 
+--index-url https://download.pytorch.org/whl/cu121 
+xformers 
+trl 
+peft 
+accelerate 
+datasets 
+bitsandbytes
+torchao
+
+# Для удостоверения, что CUDA установлена правильно, можно использовать следующую команду:
+# python3 -c "import torch; print(torch.cuda.is_available()); print(torch.version.cuda)"
+
+# Если "pip install -r requirements-dev.txt" не сработает, попробуйте выполнить команды:
+# pip install --upgrade pip setuptools wheel
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+# pip install xformers --index-url https://download.pytorch.org/whl/cu121
+# pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
+# pip install trl peft accelerate datasets bitsandbytes

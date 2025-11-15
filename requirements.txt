@@ -1,0 +1,6 @@
+pyrogram
+pyrogram[asyncio]
+python-dotenv
+setuptools
+llama-cpp-python
+emoji
