@@ -3,7 +3,7 @@ import re
 import emoji
 from llama_cpp import Llama
 
-MODEL_PATH = "gemma-3-1b-pt-q4_0.gguf" 
+MODEL_PATH = "gemma-3-4b-pt-q4_0.gguf" 
 
 def load_model():
     llm = Llama(

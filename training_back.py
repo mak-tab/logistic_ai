@@ -6,8 +6,8 @@ from unsloth import FastLanguageModel
 from unsloth.chat_templates import get_chat_template
 
 max_seq_length = 2048
-dtype = None
-load_in_4bit = True
+dtype = None 
+load_in_4bit = True 
 
 model, tokenizer = FastLanguageModel.from_pretrained(
     model_name = "unsloth/Phi-3-mini-4k-instruct",
@@ -41,18 +41,12 @@ def formatting_prompts_func(examples):
 dataset = load_dataset("json", data_files="dataset.jsonl", split="train")
 dataset = dataset.map(formatting_prompts_func, batched = True,)
 
-split_dataset = dataset.train_test_split(test_size=16, seed=3407)
-
-train_dataset = split_dataset["train"] # 80 примеров
-eval_dataset = split_dataset["test"]   # 16 примеров
-
-print(f"    -    {len(train_dataset)} training \n\n    -    {len(eval_dataset)} evaluation.")
+print(f"Dataset loaded. Rows: {len(dataset)}")
 
 trainer = SFTTrainer(
     model = model,
     tokenizer = tokenizer,
-    train_dataset = train_dataset,
-    eval_dataset = eval_dataset,
+    train_dataset = dataset,
     dataset_text_field = "text",
     max_seq_length = max_seq_length,
     dataset_num_proc = 2,
@@ -71,12 +65,6 @@ trainer = SFTTrainer(
         lr_scheduler_type = "linear",
         seed = 3407,
         output_dir = "outputs",
-        evaluation_strategy = "steps",
-        eval_steps = 10,
-        save_strategy = "steps",
-        save_steps = 10,
-        load_best_model_at_end = True,
-        metric_for_best_model = "eval_loss",
     ),
 )
 
