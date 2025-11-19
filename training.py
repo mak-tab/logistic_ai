@@ -28,7 +28,7 @@ def get_optimal_config():
     elif total_vram_gb <= 16.5:
         micro_batch = 8
         gradient_checkpointing = True
-    elif total_vram_gb <= 24.5:``
+    elif total_vram_gb <= 24.5:
         micro_batch = 16 
         gradient_checkpointing = False 
     else:
