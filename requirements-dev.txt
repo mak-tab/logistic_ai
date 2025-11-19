@@ -1,23 +1,28 @@
-torch
-xformers
-bitsandbytes
+unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git
 transformers
-peft
-accelerate
 datasets
 trl
-unsloth @ git+https://github.com/unslothai/unsloth.git
+peft
+accelerate
+bitsandbytes
+xformers
+scipy
+protobuf
+sentencepiece
 
-# Для удостоверения, что CUDA установлена правильно, можно использовать следующую команду:
+# pip install --no-deps packaging ninja einops flash-attn xformers trl peft accelerate bitsandbytes
+
+# ------Для удостоверения, что CUDA установлена правильно, можно использовать следующую команду:
 # python3 -c "import torch; print(torch.cuda.is_available()); print(torch.version.cuda)"
 
-# Если "pip install -r requirements-dev.txt" не сработает, попробуйте выполнить команды:
+# ------Если "pip install -r requirements-dev.txt" не сработает, попробуйте выполнить команды:
 # pip install setuptools wheel
 # pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 # pip install xformers --index-url https://download.pytorch.org/whl/cu126
 # pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
 # pip install trl peft accelerate datasets bitsandbytes
 
+# ------Для отдельной подготовки и квантования модели:
 # cd ~/Projects/stt
 # git clone https://github.com/ggerganov/llama.cpp
 # cd llama.cpp
@@ -28,3 +33,42 @@ unsloth @ git+https://github.com/unslothai/unsloth.git
 # python3 llama.cpp/convert_hf_to_gguf.py model_gguf --outtype f16 --outfile model-f16.gguf
 # ./llama.cpp/build/bin/llama-quantize model-f16.gguf final_model_q4_k_m.gguf q4_k_m
 # rm model-f16.gguf
+
+# Windows
+
+# --extra-index-url https://download.pytorch.org/whl/cu121
+# torch
+# torchvision
+# torchaudio
+# transformers
+# datasets
+# peft
+# trl
+# accelerate
+# bitsandbytes
+# scipy
+# protobuf
+
+# ------Для сборки и запуска Docker:
+# docker build -t my-llm-trainer .
+# docker run --gpus all -v $(pwd)/outputs:/app/outputs my-llm-trainer
+
+# ------Для конвертации:
+# numpy
+# sentencepiece
+# gguf>=0.1.0
+
+# ------Использование Remote SSH в VS Code для работы на мощном ПК из ноутбука
+# VS Code Remote - SSH
+# Ты пишешь код в VS Code на ноутбуке, видишь файлы ноутбука, но выполняется код, терминал и Python на мощном ПК.
+# Как это выглядит: Ты открываешь VS Code на ноутбуке -> нажимаешь "Connect" -> и магия: терминал внизу показывает ubuntu@DesktopPC. Ты запускаешь python train.py, и 24GB VRAM на ПК начинают работать, а твой ноутбук холодный и тихий.
+# Инструкция:
+# На ПК (Сервер):
+# Если там Ubuntu: Установи SSH (sudo apt install openssh-server).
+# Если там Windows: Установи OpenSSH Server (Настройки -> Приложения -> Дополнительные компоненты -> OpenSSH Server) и запусти службу.
+# Узнай IP-адрес ПК (команда ip addr или ipconfig).
+# На Ноутбуке (Клиент):
+# Установи расширение "Remote - SSH" от Microsoft в VS Code.
+# Нажми F1 -> Remote-SSH: Connect to Host....
+# Введи: username@192.168.1.X (IP твоего ПК).
+# Введи пароль от ПК.

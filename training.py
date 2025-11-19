@@ -150,4 +150,3 @@ try:
     print("✅   -   Done!")
 except Exception as e:
     print(f"✅   -   GGUF conversion failed: {e}")
-    print("✅   -   Don't worry, adapters are saved in 'lora_adapters'. Use manual conversion if needed.")
